@@ -1,0 +1,307 @@
+﻿<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+	<link rel="stylesheet" href="css/book.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/qrcode.js"></script>
+
+
+
+</head>
+<title>MNRE-SLC | Short URL</title>
+<body>
+<div id="wrapper">
+    <div id="container">
+
+        <section class="open-book">
+            <header>
+                <h1>Work Standard</h1>
+                <h6>MNRE-SLC-004</h6>
+            </header>
+            <article>
+
+    <h2 class="chapter-title">สำเนา</h2>
+<center><strong>ประกาศส่วนข้อมูลข่าวสารและบริการร่วม</strong><br>เรื่อง กำหนดมาตรฐานการจัดทำ QR Code (ฉบับที่ 2)</center>
+<br>
+
+<p>
+เพื่อให้การจัดทำ QR Code มีความเรียบง่ายและปลอดภัย จึงกำหนดมาตรฐานการจัดทำ QR Code กรณี URL มีจำนวนตัวอักษรมาก ให้ใช้โปรแกรมตามท้ายประกาศนี้ในการจัดทำ Short URL ก่อน แล้วจึงจัดทำ QR Code จาก  Short URL นั้น และให้มีขนาด 1.5 &#10005; 1.5 เซนติเมตร</p><br>
+
+<p>ทั้งนี้ ตั้งแต่บัดนี้เป็นต้นไป </p>
+<p><br><center>สั่ง ณ วันที่ 13 กันยายน 2566<br><br>
+(ลงนาม) <strong>มนตรี เกียรติเผ่าพันธ์</strong><br>
+(นายมนตรี เกียรติเผ่าพันธ์)<br>
+ผู้อำนวยการส่วนข้อมูลข่าวสารและบริการร่วม</center>
+
+</p><br>
+<dd>
+<h1>Long URL</h1>
+</dd>
+<dd>
+<div class="stage">
+	<input type="url" id="url" placeholder="Enter URL to shorten incl. http(s)://" value="http://" style="width:70%;font-size:18px;">
+	<button id="action">Get ShortUrl</button>
+	<br><br>
+	
+</div>
+
+<dd>
+<h1>Short URL</h1>
+<input id="text" type="text" value='https://' style="width:100%;font-size:18px;"><br>
+<input type="text" id="width" value="150" style='width:100px'>
+<input type="text" id="height" value="150" style='width:100px'>
+<input type="color" id="dark" value="#000000">
+<input type="color" id="light" value="#ffffff">
+<button id="generate">Get QR Code</button><br>
+<a id="download" style="display: none;">Download (PC)</a>
+<br>
+</dd>
+
+<div id="qrcode"></div>
+</dd>
+</p>
+<br><br>
+<dd>
+
+<dd>
+<h3>MIT License</h3>
+Copyright (c) 2023 by Walter Nascimento Barroso <p>(https://codepen.io/WalterNascimento/pen/zYNPNLe)</p>
+Copyright (c) 2023 by Erin E. Sullivan <p>(https://codepen.io/erinesullivan/pen/gxdbzp)</p>
+Copyright (c) 2023 by PMK <p>(https://codepen.io/pmk/pen/qgLdzJ)</p>
+Copyright (c) 2023 Montri Kiatphaophan <p>(https://kietpawpan.github.io/QRCode)</p><br>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:<br><br>
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.<br><br>
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</p>
+<br>
+<center>
+<hr width='35%'>
+</center>
+</dd>
+
+<div id='qr'></div>
+
+
+            </article>
+            <footer>
+                <ol id="page-numbers">
+                    <li>1</li>
+                    <li>2</li>
+                </ol>
+            </footer>
+        </section>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+	width : 150,
+	height : 150
+});
+
+function makeCode () {		
+	var elText = document.getElementById("text");
+	
+	if (!elText.value) {
+		alert("Input a text");
+		elText.focus();
+		return;
+	}
+	
+	qrcode.makeCode(elText.value);
+
+}
+
+makeCode();
+
+$("#text").
+	on("blur", function () {
+		makeCode();
+	}).
+	on("keydown", function (e) {
+		if (e.keyCode == 13) {
+			makeCode();
+		}
+	});
+
+
+const qrcodeEl = document.querySelector('#qrcode');
+const textEl = document.querySelector('#text');
+const generateEl = document.querySelector('#generate');
+const widthEl = document.querySelector('#width');
+const heightEl = document.querySelector('#height');
+const darkEl = document.querySelector('#dark');
+const lightEl = document.querySelector('#light');
+const downloadEl = document.querySelector('#download');
+
+generateEl.addEventListener('click', generate);
+
+function generate() {
+  qrcodeEl.innerHTML = ``;
+  new QRCode(qrcodeEl, {
+    text: textEl.value,
+    width: widthEl.value,
+    height: heightEl.value,
+    colorDark: darkEl.value,
+    colorLight: lightEl.value
+  });
+
+  download();
+}
+
+function download() {
+  const canvasEl = qrcodeEl.querySelector('canvas');
+  let data = canvasEl.toDataURL('image/png');
+
+  downloadEl.setAttribute('href', data);
+  downloadEl.setAttribute('download', 'qrcode.png');
+  downloadEl.style.display = 'inline-block';
+}
+
+
+</script>
+
+      <script id="rendered-js">
+/*
+ * Pure Vanilla JavaScript solution that doesn't require any authorization. 
+ * Uses JSONP request to get around CORS blocking.
+ * The Short URL generated is copied to clipboard.
+ *
+ * Tested in Firefox, Chrome, Edge & IE11
+ */
+
+(function () {
+  var debug = false;
+
+  // JSONP request
+  var loadJSONP = function () {
+    var unique = 0;
+    return function (url, callback, context) {
+      var name = "_jsonp_" + unique++;
+      url += (url.match(/\?/) ? "&" : "?") + "callback=" + name;
+      var script = document.createElement("script");
+      script.src = url;
+      window[name] = function (data) {
+        callback.call(context || window, data);
+        document.querySelector("head").removeChild(script);
+        script = null;
+        delete window[name];
+      };
+      document.querySelector("head").appendChild(script);
+    };
+  }();
+
+  // Copy text to clipboard
+  var copyToClipboard = function (txt) {
+    var ta = document.createElement("textarea");
+    ta.value = txt;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "absolute";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+  };
+
+  // On mousedown handler
+  var createShortUrl = function (e) {
+    e.preventDefault();
+    var url = this.value.trim();
+    if (debug) console.log("mousedown event triggered");
+    if (this.validity && this.validity.valid && url !== "") {
+      if (debug) console.log("url is valid");
+      var isgdUrl =
+      "https://is.gd/create.php?format=json&url=" + encodeURIComponent(url);
+
+      loadJSONP(isgdUrl, function (data) {
+        if (debug) console.log("JSONP callback triggered");
+        // Browsers won't allow ClipBoard action here due to callback is not a "user generated event"
+        // So instead we set up a "mouseup" event, which is a "user generated event" and apply the clipboard action there.
+        var mouseupHandler = function () {
+          if (debug) console.log("mouseup event triggered");
+          copyToClipboard(data.shorturl);
+          outputEl.value = data.shorturl;
+          // IE/Edge doesn't support the "once: true" parameter
+          // so the handler must be removed manually
+          window.removeEventListener("mouseup", mouseupHandler, false);
+        };
+
+        window.addEventListener("mouseup", mouseupHandler, false);
+        // Trigger the 'mouseup' event (it can only fire once)
+        var event;
+        if (typeof MouseEvent !== "function") {
+          // IE/Edge
+          event = document.createEvent("MouseEvent");
+          event.initMouseEvent(
+          "mouseup",
+          true,
+          true,
+          window,
+          0,
+          0,
+          0,
+          0,
+          0,
+          false,
+          false,
+          false,
+          false,
+          0,
+          null);
+
+        } else {
+          event = new MouseEvent("mouseup", {
+            view: window,
+            bubbles: true,
+            cancelable: false });
+
+        }
+        window.dispatchEvent(event);
+      });
+    } else {
+      outputEl.innerHTML =
+      "<span class='error'>Please enter a valid URL incl. http(s)://</span>";
+    }
+  };
+
+  var inputEl = document.querySelector("input#url"),
+  buttonEl = document.querySelector("button#action"),
+  outputEl = document.querySelector("#text");
+
+  if (debug) inputEl.value = "https://codepen.io/pmk/pen/qgLdzJ";
+
+  buttonEl.addEventListener("mousedown", createShortUrl.bind(inputEl), false);
+  inputEl.addEventListener(
+  "focus",
+  function () {
+    outputEl.innerHTML = "";
+  },
+  false);
+
+})();
+//# sourceURL=pen.js
+    </script>
+
+  
+
+
+</body>
+</html>
