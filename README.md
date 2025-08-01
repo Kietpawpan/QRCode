@@ -1,5 +1,7 @@
 # QR Code Generator
+https://kietpawpan.github.io/QRCode
 
+```
 Dear all,
 
 I am pleased to announce the development of a new web application designed to generate secure QR codes for official correspondence.
@@ -10,3 +12,4 @@ Best regards,
 
 Monte Kietpawpan, Ph.D.
 EPO Region 10 Director
+```
