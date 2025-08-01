@@ -10,6 +10,6 @@ This solution was initially created for EPO Region 10, but its scalable design a
 
 Best regards,
 
-Monte Kietpawpan, Ph.D.
+Monte Kietpawpan
 EPO Region 10 Director
 ```
